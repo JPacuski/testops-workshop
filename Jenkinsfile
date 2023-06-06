@@ -68,7 +68,7 @@ pipeline {
 
         // run tests
 
-    stage('Run tests') {
+        stage('Run tests') {
                 agent {
                     docker {
                        image 'cypress/included:12.2.0'
@@ -90,7 +90,7 @@ pipeline {
 
 
                 }
-            }
+         }
     }
 
     post {
