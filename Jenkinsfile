@@ -68,26 +68,28 @@ pipeline {
 
         // run tests
 
-        stage('Run tests') {
-        agent {
-            docker {
-                image 'cypress/included:12.2.0'
-                args '--network host --entrypoint=\'\''
-            }
-        }
-            steps {
-                dir('pipeline_ex/') {
-                script {
-                    try {
-                        sh 'CYPRESS_BASE_URL=localhost:3000 cypress run'
-                    }
-                    catch (err) {
-                         print(err)
+    stage('Run tests') {
+                agent {
+                    docker {
+                       image 'cypress/included:12.2.0'
+                       args '--network host --entrypoint=\'\''
                     }
                 }
+                steps {
+                    dir('pipeline_ex/') {
+                        script {
+                            try {
+                                sh 'CYPRESS_BASE_URL=localhost:3000 cypress run'
+                            }
+                            catch (err) {
+                                print(err)
+                            }
+                        }
+                    }
+
+
                 }
             }
-        }
     }
 
     post {
